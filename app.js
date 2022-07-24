@@ -54,10 +54,26 @@ app.post("/articles",(req,res)=>{
         content : req.body.content
     })
 
-    newArticle.save()
+    newArticle.save((err)=>{
+        if(!err){
+            res.send("Succesfully added a  new article")
+        }else{
+            res.send(err)
+        }
+    })
 
 })
 
+
+app.delete("/articles",(req,res)=>{
+    Article.deleteMany({},(err)=>{
+        if(!err){
+            res.send("Succesfully deleted all articles")
+        }else{
+            res.send(err)
+        }
+    })
+})
 
 
 
