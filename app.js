@@ -90,10 +90,31 @@ app.route("/articles/:articleTitle")
             { title: req.body.title , content: req.body.content } ,
              (err)=> {
                 if(!err){
+                    res.send("Successfully updated all article")
+                }else{
+                    res.send(err)
+                }
+        })
+    })
+    .patch((req,res)=>{
+        Article.updateOne(
+            { title: req.params.articleTitle },
+            req.body ,
+             (err)=> {
+                if(!err){
                     res.send("Successfully updated article")
                 }else{
                     res.send(err)
                 }
+        })
+    })
+    .delete((req,res)=>{
+        Article.deleteOne({title : req.params.articleTitle}, (err) => {
+            if (!err) {
+                res.send("Succesfully deleted article")
+            } else {
+                res.send(err)
+            }
         })
     })
 
